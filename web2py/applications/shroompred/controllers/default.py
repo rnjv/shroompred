@@ -7,6 +7,11 @@
 # ---- example index page ----
 def index():
     response.flash = T("Welcome to ShroomPred")
+    # Form to acquire user input
+    
+    # Store result
+    
+    # Redirect to result
     
     return dict(message=T('Welcome to Shroompred'))
 

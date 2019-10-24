@@ -97,3 +97,36 @@ CREATE TABLE "wiki_media"(
     "modified_by" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  
 );
 success!
+timestamp: 2019-10-24T21:41:22.326975
+CREATE TABLE "shroom_attr"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "cap_shape" CHAR(512),
+    "cap_surface" CHAR(512),
+    "cap_color" CHAR(512),
+    "bruises" CHAR(512),
+    "odor" CHAR(512),
+    "gill_attachment" CHAR(512),
+    "gill_spacing" CHAR(512),
+    "gill_size" CHAR(512),
+    "gill_color" CHAR(512),
+    "stalk_shape" CHAR(512),
+    "stalk_root" CHAR(512),
+    "stalk_surface_above_ring" CHAR(512),
+    "stalk_surface_below_ring" CHAR(512),
+    "stalk_color_above_ring" CHAR(512),
+    "stalk_color_below_ring" CHAR(512),
+    "veil_type" CHAR(512),
+    "veil_color" CHAR(512),
+    "ring_number" CHAR(512),
+    "ring_type" CHAR(512),
+    "spore_print_color" CHAR(512),
+    "population" CHAR(512),
+    "habitat" CHAR(512)
+);
+success!
+timestamp: 2019-10-24T21:42:22.478900
+ALTER TABLE "shroom_attr" ADD "prediction" CHAR(512);
+success!
+timestamp: 2019-10-24T21:48:22.615630
+ALTER TABLE "shroom_attr" ADD "source_tracking" CHAR(512);
+success!
