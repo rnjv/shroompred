@@ -8,7 +8,10 @@
 def index():
     response.flash = T("Welcome to ShroomPred")
     # Form to acquire user input
-    session.on_defaults = False
+    if request.args==['1']:
+        session.on_defaults = False
+        del session.formvars
+        session.edible = None
 
     form = SQLFORM(db.shroom_attr)
 
@@ -50,6 +53,23 @@ def index():
                "spore_print_color",
                "population",
                "habitat"]
+
+    if request.args==['2']:
+        import random
+        for i in orderlist:
+            form.vars[i] = random.choice(list(attr_list[i].keys()))
+
+    if request.args==['3']:
+        import random, os
+        import pandas as pd
+        datafile = open(os.path.join(request.folder, 'static/ml/data/mushrooms.csv'), 'r')
+        df = pd.read_csv(datafile)
+        lim_attr_list={}
+        for i in range(len(df.columns[1:])):
+            lim_attr_list[orderlist[i]] = [inv_attr_list[orderlist[i]][j] for j in list(df[df.columns[i+1]].unique())]
+        print(lim_attr_list)
+        for i in orderlist:
+            form.vars[i] = random.choice(list(lim_attr_list[i]))
 
     if form.process().accepted:
         session.formvars = form.vars

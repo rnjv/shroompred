@@ -253,4 +253,10 @@ def predict(varslist):
     test = pd.get_dummies(df.append(pd.DataFrame(varslist, columns=[i for i in df.columns]), ignore_index=True, )).drop(
         ['class_e', 'class_p'], axis=1).iloc[-1:]
 
-    return "edible" if model.predict(test)==1 else "poisonous"
+    try:
+        return "edible" if model.predict(test) == 1 else "poisonous"
+    except:
+        print(len(test.columns))
+        for i in test.columns:
+            print(i)
+        return "error"

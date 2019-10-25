@@ -15,19 +15,36 @@
 {{block results}}
             <h2 class="heading mb-3 text-center">Is the Mushroom Edible?</h2>
             <div class="sub-heading">
-              <p class="mb-4">This simple service let's you find out a mushroom's suitabality for consumption using a machine learning model.
-                  Poisonous mushrooms can make you really sick and can even be fatal. So, let's find out by filling the form !</p>
-              <p class="mb-5 pl-4 pr-4 text-center">
+                <p class="mb-5 pl-4 pr-4 text-center">
                   {{if edible=="edible":}}
-                  <a class="btn btn-success btn-lg pb_btn-pill smoothscroll pull-left" href="#section-pricing"><span class="pb_font-14 text-uppercase pb_letter-spacing-1">Yes</span></a>
+                  <a class="btn btn-success btn-lg pb_btn-pill smoothscroll pull-left" href="#"><span class="pb_font-14 text-uppercase pb_letter-spacing-1">Yes</span></a>
                   {{elif edible=="poisonous":}}
-                  <a class="btn btn-danger btn-lg pb_btn-pill smoothscroll pull-right" href="#section-pricing"><span class="pb_font-14 text-uppercase pb_letter-spacing-1">No</span></a></p>
+                  <a class="btn btn-danger btn-lg pb_btn-pill smoothscroll pull-right" href="#"><span class="pb_font-14 text-uppercase pb_letter-spacing-1">No</span></a></p>
                   {{elif edible=="unknown":}}
-                  <a class="btn btn-warning btn-lg pb_btn-pill smoothscroll" href="#section-pricing"><span class="pb_font-14 text-uppercase pb_letter-spacing-1">Unknown</span></a></p>
+                  <a class="btn btn-warning btn-lg pb_btn-pill smoothscroll" href="#"><span class="pb_font-14 text-uppercase pb_letter-spacing-1">Unknown</span></a></p>
+                  {{elif edible=="error":}}
+                  <a class="btn btn-error btn-lg pb_btn-pill smoothscroll" href="#"><span class="pb_font-14 text-uppercase pb_letter-spacing-1">Error</span></a></p>
                   {{else:}}
-                  <a class="btn btn-success btn-lg pb_btn-pill smoothscroll disabled pull-left" href="#section-pricing"><span class="pb_font-14 text-uppercase pb_letter-spacing-1">Yes</span></a>
-                  <a class="btn btn-danger btn-lg pb_btn-pill smoothscroll disabled pull-right" href="#section-pricing"><span class="pb_font-14 text-uppercase pb_letter-spacing-1">No</span></a></p>
+                  <a class="btn btn-success btn-lg pb_btn-pill smoothscroll disabled pull-left" href="#"><span class="pb_font-14 text-uppercase pb_letter-spacing-1">Yes</span></a>
+                  <span class="text-center align-middle"> or </span>
+                  <a class="btn btn-danger btn-lg pb_btn-pill smoothscroll disabled pull-right" href="#"><span class="pb_font-14 text-uppercase pb_letter-spacing-1">No</span></a></p>
                   {{pass}}
+              <p class="mb-4 pt-3">This simple service let's you find out a mushroom's suitabality for consumption using a machine learning model.
+                  Poisonous mushrooms can make you really sick and can even be fatal. So, let's find out by filling the form !</p>
+
+            </div>
+{{end}}
+
+{{block try_reset}}
+            <br>
+
+            <div class="sub-heading mb-5">
+              <p class="">Some quick buttons.</p>
+              <p class="mb-5">
+                  <a class="btn btn-dark btn-lg pb_btn-pill smoothscroll ml-2 mr-4" href="{{=URL(args=1)}}"><span class="pb_font-14 text-uppercase pb_letter-spacing-1">Reset</span></a>
+                  <a class="btn btn-info btn-lg pb_btn-pill smoothscroll" href="{{=URL(args=2)}}"><span class="pb_font-14 text-uppercase pb_letter-spacing-1">Random</span></a>
+                  <a class="btn btn-info btn-lg pb_btn-pill smoothscroll mt-4 ml-2" href="{{=URL(args=3)}}"><span class="pb_font-14 text-uppercase pb_letter-spacing-1">Random2</span></a>
+              </p>
             </div>
 {{end}}
 
