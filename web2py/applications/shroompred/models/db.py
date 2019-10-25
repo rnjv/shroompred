@@ -205,7 +205,10 @@ defaults = [
   'v',
   'd']
 
-on_defaults = False
+if request.vars.on_defaults=="t":
+    on_defaults = True
+else:
+    on_defaults = False
 
 db.define_table("shroom_attr",
                 Field("cap_shape", requires=IS_IN_SET(list(attr_list["cap_shape"].keys())), default=inv_attr_list["cap_shape"][defaults[0]] if on_defaults else None),

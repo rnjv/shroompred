@@ -8,12 +8,38 @@
 def index():
     response.flash = T("Welcome to ShroomPred")
     # Form to acquire user input
-    
+    session.on_defaults = False
+
+    form = SQLFORM(db.shroom_attr)
+
+    if session.formvars:
+        if session.formvars['id']:
+            del session.formvars['id']
+        form.vars = session.formvars
+
+    form.elements('form')[0]['_class'] = "bg-white rounded pb_form_v1"
+    form.elements('input')[-1]['_class'] = "btn btn-primary btn-lg btn-block pb_btn-pill btn-shadow-blue"
+    form.elements('input')[-1].parent['_class'] += ' mx-auto'
+    form.elements('input')[-1].parent['_style'] = 'padding-top:15px;'
+    for i in form.elements('label'):
+        i['_class'] += ' text-wrap'
+    form.components.insert(0, XML('<h2 class="mb-4 mt-0 text-center">Enter Mushroom Attributes</h2>'))
+
     # Store result
+
+    if form.process().accepted:
+        session.formvars = form.vars
+        response.flash = T("Success")
+    elif form.errors:
+        session.formvars = form.vars
+        response.flash = T("Erorrs")
+    else:
+        session.formvars = form.vars
+        response.flash = T("Unknown")
     
     # Redirect to result
     
-    return dict(message=T('Welcome to Shroompred'))
+    return dict(message=T('Welcome to Shroompred'), form=form)
 
 # ---- Action for login/register/etc (required for auth) -----
 def user():

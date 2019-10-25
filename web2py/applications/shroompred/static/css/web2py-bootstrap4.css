@@ -43,6 +43,7 @@ div.error {
     color: red;
     display: inline-block;
     padding: 5px;
+    font-size: 12px;
 }
 div.w2p_flash.alert {
     display: none;
