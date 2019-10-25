@@ -236,3 +236,21 @@ db.define_table("shroom_attr",
                 Field("prediction", readable=False, writable=False),
                 Field("source_tracking", requires=IS_IN_SET(["frontend", "rest"]), readable=False, writable=False)
 )
+
+def predict(varslist):
+
+    if varslist[0][6]=='d' or varslist[0][11]=='u' or varslist[0][16]=='u':
+        return "unknown"
+
+    import pandas as pd
+    import pickle, os
+    modelfile = open(os.path.join(request.folder, 'static/ml/model/final_model.pkl'), 'rb')
+    datafile = open(os.path.join(request.folder, 'static/ml/data/mushrooms.csv'), 'r')
+
+    model = pickle.load(modelfile)
+    df= pd.read_csv(datafile)
+
+    test = pd.get_dummies(df.append(pd.DataFrame(varslist, columns=[i for i in df.columns]), ignore_index=True, )).drop(
+        ['class_e', 'class_p'], axis=1).iloc[-1:]
+
+    return "edible" if model.predict(test)==1 else "poisonous"

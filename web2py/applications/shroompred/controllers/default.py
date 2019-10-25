@@ -27,9 +27,40 @@ def index():
 
     # Store result
 
+    # Create vars in order
+    orderlist = ["cap_shape",
+               "cap_surface",
+               "cap_color",
+               "bruises",
+               "odor",
+               "gill_attachment",
+               "gill_spacing",
+               "gill_size",
+               "gill_color",
+               "stalk_shape",
+               "stalk_root",
+               "stalk_surface_above_ring",
+               "stalk_surface_below_ring",
+               "stalk_color_above_ring",
+               "stalk_color_below_ring",
+               "veil_type",
+               "veil_color",
+               "ring_number",
+               "ring_type",
+               "spore_print_color",
+               "population",
+               "habitat"]
+
     if form.process().accepted:
         session.formvars = form.vars
+        varslist=[['e']]
+        for i in orderlist:
+            varslist[0].append(attr_list[i][form.vars[i]])
+        session.edible = predict(varslist)
+        db(db.shroom_attr.id==form.vars.id).update(prediction=session.edible, source_tracking="frontend")
+        redirect('index')
         response.flash = T("Success")
+
     elif form.errors:
         session.formvars = form.vars
         response.flash = T("Erorrs")
@@ -38,8 +69,10 @@ def index():
         response.flash = T("Unknown")
     
     # Redirect to result
-    
-    return dict(message=T('Welcome to Shroompred'), form=form)
+
+
+
+    return dict(message=T('Welcome to Shroompred'), form=form, edible=session.edible)
 
 # ---- Action for login/register/etc (required for auth) -----
 def user():
