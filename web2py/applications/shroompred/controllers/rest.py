@@ -11,7 +11,9 @@ def gen_varslist():
     import random, os
 
     import pandas as pd
-    df = pd.read_csv("/home/rh/dsprojects/shroompred/data/raw/mushrooms.csv")
+    #df = pd.read_csv("/home/rh/dsprojects/shroompred/data/raw/mushrooms.csv")
+    datafile = open(os.path.join(request.folder, 'static/ml/data/mushrooms.csv'), 'r')
+    df = pd.read_csv(datafile)
     lim_attr_list = {}
 
     for i in range(len(df.columns[1:])):
@@ -30,7 +32,10 @@ def api():
     if not request.env.request_method == 'GET': raise HTTP(403)
     body = request.body.read()
     if body:
-        bodyvars=json.loads(body.decode('UTF-8'))
+        try:
+            bodyvars=json.loads(body.decode('UTF-8'))
+        except:
+            raise HTTP(400, "400 Bad Request: Unable to parse request")
     else:
         raise HTTP(400, "400 Bad Request: Mushroom attributes not found")
 
@@ -47,16 +52,22 @@ def api():
     if request.vars.short=='0':
         try:
             for i in orderlist:
-                varlist[0].append(bodyvars[i])
+                if bodyvars[i] not in list(inv_attr_list[i].keys()):
+                    raise HTTP(400, "400 Bad Request: Mushroom attribute not found")
+                else:
+                    varlist[0].append(bodyvars[i])
         except:
             raise HTTP(400)
     else:
         try:
             for i in orderlist:
-                varlist[0].append(attr_list[bodyvars[i]])
+                if bodyvars[i] not in list(attr_list[i].keys()):
+                    raise HTTP(400, "400 Bad Request: Mushroom attribute not found")
+                else:
+                    varlist[0].append(attr_list[bodyvars[i]])
         except:
             raise HTTP(400)
-    print(varlist)
+
     pred = predict(varlist)
 
     return response.json({'edible': pred})

@@ -6,7 +6,8 @@
 
 # ---- example index page ----
 def index():
-    response.flash = T("Welcome to ShroomPred")
+    response.flash = T("Welcome to ShroomPred") if session.visited != 1 else None
+    session.visited = 1
     # Form to acquire user input
     if request.args==['1']:
         session.on_defaults = False
@@ -61,7 +62,6 @@ def index():
         response.flash = T("Errors")
     else:
         session.formvars = form.vars
-        response.flash = T("Unknown")
     
     # Redirect to result
 

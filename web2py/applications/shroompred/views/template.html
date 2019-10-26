@@ -26,11 +26,12 @@
     <link rel="stylesheet" href="{{=URL('static', 'assets/css/helpers.css')}}">
     <link rel="stylesheet" href="{{=URL('static', 'assets/css/style.css')}}">
     <link rel="stylesheet" href="{{=URL('static', 'assets/css/landing-2.css')}}">
+    {{include 'web2py_ajax.html'}} <!-- this includes jquery.js, calendar.js/.css and web2py.js -->
+    {{block head}}{{end}}
 	</head>
 	<body data-spy="scroll" data-target="#pb-navbar" data-offset="200">
 
     <nav class="navbar navbar-expand-lg navbar-dark pb_navbar pb_scrolled-light" id="pb-navbar">
-        <div class="w2p_flash alert alert-dismissable">{{=response.flash or ''}}</div>
       <div class="container">
         <a class="navbar-brand" href="index.html">ShroomPred</a>
         <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#probootstrap-navbar" aria-controls="probootstrap-navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,39 +39,44 @@
         </button>
         <div class="collapse navbar-collapse" id="probootstrap-navbar">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a class="nav-link" href="#section-home">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{=URL('shroompred','default', 'index')}}" href="#section-home">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#section-history">History</a></li>
             <li class="nav-item"><a class="nav-link" href="#section-faq">FAQ</a></li>
             <li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0"><a class="nav-link" href="https://uicookies.com/" target="_blank"><span class="pb_rounded-4 px-4">REST Service</span></a></li>
+              {{if 'auth' in globals():}}
+        <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{if auth.user:}}{{=auth.user.first_name}}{{else:}}Login{{pass}}
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+              {{if auth.user:}}
+              <a class="dropdown-item" href="{{=URL('default','user/profile')}}">{{=T('Profile')}}</a>
+              {{if 'change_password' not in auth.settings.actions_disabled:}}
+              <a class="dropdown-item" href="{{=URL('default','user/change_password')}}">{{=T('Change Password')}}</a>
+              {{pass}}
+              <a class="dropdown-item" href="{{=URL('default','user/logout')}}">{{=T('Logout')}}</a>
+              {{else:}}
+              <a class="dropdown-item" href="{{=URL('default','user/login')}}">{{=T('Login')}}</a>
+              {{if 'register' not in auth.settings.actions_disabled:}}
+              <a class="dropdown-item" href="{{=URL('default','user/register')}}">{{=T('Sign up')}}</a>
+              {{pass}}
+              {{if 'retrieve_password' not in auth.settings.actions_disabled:}}
+              <a class="dropdown-item" href="{{=URL('default','user/retrieve_password')}}">{{=T('Lost Password')}}</a>
+              {{pass}}
+              {{pass}}
+            </div>
+          </li>
+        </ul>
+        {{pass}}
           </ul>
         </div>
       </div>
     </nav>
     <!-- END nav -->
+    <div class="w2p_flash alert alert-dismissable">{{=response.flash or ''}}</div>
+    {{include}}
 
-
-
-
-    <section class="overflow-hidden cover-bg-indigo cover-bg-opacity text-left pb_gradient_v1 pb_slant-light" id="section-home" style="padding-bottom:150px;">
-      <div class="container">
-        <div class="row" style="padding-top:100px;">
-          <div class="col-md-4 pb_cover_v3">
-              {{block results}}
-              {{end}}
-              {{block try_reset}}
-              {{end}}
-
-          </div>
-          <div class="col-md-1">
-          </div>
-          <div class="col-md-7 relative align-self-center">
-                {{block form}}
-                {{end}}
-
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- END section -->
 
     <footer class="pb_footer bg-light" role="contentinfo">
       <div class="container">
@@ -101,7 +107,7 @@
     <script src="{{=URL('static', 'assets/js/bootstrap.min.js')}}"></script>
 
     <script src="{{=URL('static','js/web2py-bootstrap4.js')}}"></script>
-
+    {{block page_js}}{{end page_js}}
     <script src="{{=URL('static', 'assets/js/slick.min.js')}}"></script>
     <script src="{{=URL('static', 'assets/js/jquery.mb.YTPlayer.min.js')}}"></script>
 

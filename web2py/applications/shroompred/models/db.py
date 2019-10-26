@@ -263,7 +263,7 @@ db.define_table("shroom_attr",
 )
 
 def predict(varslist):
-
+    # Known parameters not available in training set - identified by eye
     if varslist[0][6]=='d' or varslist[0][11]=='u' or varslist[0][16]=='u':
         return "unknown"
 
@@ -275,13 +275,15 @@ def predict(varslist):
     model = pickle.load(modelfile)
     df= pd.read_csv(datafile)
 
+    # hacky way to transform received var to test df
     test = pd.get_dummies(df.append(pd.DataFrame(varslist, columns=[i for i in df.columns]), ignore_index=True, )).drop(
         ['class_e', 'class_p'], axis=1).iloc[-1:]
 
     try:
         return "edible" if model.predict(test) == 1 else "poisonous"
     except:
-        print(len(test.columns))
+    # Catch unavailable parameters not identified by eye from above and simulate error. We know the 'error' is caused
+    # by unavailable parameters during training, therefore model cannot make predictions
         for i in test.columns:
             print(i)
         return "error"

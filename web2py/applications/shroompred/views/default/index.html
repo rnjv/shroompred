@@ -1,19 +1,10 @@
 {{extend 'template.html'}}
 
-{{block header}}
-<div class="jumbotron jumbotron-fluid background" style="background-color: #333; color:white; padding:30px;word-wrap:break-word;">
-  <div class="container center">
-    <h1 class="display-5">/{{=request.application}}/{{=request.controller}}/{{=request.function}}</h1>
-  </div>
-</div>
-{{end}}
-
-{{block form}}
-    {{=form}}
-        {{end}}
-
-{{block results}}
-            <h2 class="heading mb-3 text-center">Is the Mushroom Edible?</h2>
+<section class="overflow-hidden cover-bg-indigo cover-bg-opacity text-left pb_gradient_v1 pb_slant-light" id="section-home" style="padding-bottom:150px;">
+      <div class="container">
+        <div class="row" style="padding-top:100px;">
+          <div class="col-md-4 pb_cover_v3">
+              <h2 class="heading mb-3 text-center">Is the Mushroom Edible?</h2>
             <div class="sub-heading">
                 <p class="mb-5 pl-4 pr-4 text-center">
                   {{if edible=="edible":}}
@@ -33,10 +24,8 @@
                   Poisonous mushrooms can make you really sick and can even be fatal. So, let's find out by filling the form !</p>
 
             </div>
-{{end}}
 
-{{block try_reset}}
-            <br>
+              <br>
 
             <div class="sub-heading mb-5">
               <p class="">Some quick buttons.</p>
@@ -46,5 +35,15 @@
                   <a class="btn btn-info btn-lg pb_btn-pill smoothscroll mt-4 ml-2" href="{{=URL(args=3)}}"><span class="pb_font-14 text-uppercase pb_letter-spacing-1">Random2</span></a>
               </p>
             </div>
-{{end}}
 
+          </div>
+          <div class="col-md-1">
+          </div>
+          <div class="col-md-7 relative align-self-center">
+                {{=form}}
+
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- END section -->
