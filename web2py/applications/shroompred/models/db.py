@@ -236,6 +236,8 @@ else:
     on_defaults = False
 
 db.define_table("shroom_attr",
+                Field("prediction", readable=False, writable=False),
+                Field("source_tracking", requires=IS_IN_SET(["frontend", "rest"]), readable=False, writable=False),
                 Field("cap_shape", requires=IS_IN_SET(list(attr_list["cap_shape"].keys())), default=inv_attr_list["cap_shape"][defaults[0]] if on_defaults else None),
                 Field("cap_surface", requires=IS_IN_SET(list(attr_list["cap_surface"].keys())), default=inv_attr_list["cap_surface"][defaults[1]] if on_defaults else None),
                 Field("cap_color", requires=IS_IN_SET(list(attr_list["cap_color"].keys())), default=inv_attr_list["cap_color"][defaults[2]] if on_defaults else None),
@@ -257,9 +259,7 @@ db.define_table("shroom_attr",
                 Field("ring_type", requires=IS_IN_SET(list(attr_list["ring_type"].keys())), default=inv_attr_list["ring_type"][defaults[18]] if on_defaults else None),
                 Field("spore_print_color", requires=IS_IN_SET(list(attr_list["spore_print_color"].keys())), default=inv_attr_list["spore_print_color"][defaults[19]] if on_defaults else None),
                 Field("population", requires=IS_IN_SET(list(attr_list["population"].keys())), default=inv_attr_list["population"][defaults[20]] if on_defaults else None),
-                Field("habitat", requires=IS_IN_SET(list(attr_list["habitat"].keys())), default=inv_attr_list["habitat"][defaults[21]] if on_defaults else None),
-                Field("prediction", readable=False, writable=False),
-                Field("source_tracking", requires=IS_IN_SET(["frontend", "rest"]), readable=False, writable=False)
+                Field("habitat", requires=IS_IN_SET(list(attr_list["habitat"].keys())), default=inv_attr_list["habitat"][defaults[21]] if on_defaults else None)
 )
 
 def predict(varslist):

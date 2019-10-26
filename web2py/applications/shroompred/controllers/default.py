@@ -69,6 +69,20 @@ def index():
 
     return dict(message=T('Welcome to Shroompred'), form=form, edible=session.edible)
 
+
+def faq():
+    return dict()
+
+def restdoc():
+    return dict()
+
+def history():
+    db.shroom_attr.prediction.readable=True
+    db.shroom_attr.source_tracking.readable=True
+    db.shroom_attr.id.readable=False
+    grid=SQLFORM.smartgrid(db.shroom_attr, csv=False)
+    return dict(grid=grid)
+
 # ---- Action for login/register/etc (required for auth) -----
 def user():
     """

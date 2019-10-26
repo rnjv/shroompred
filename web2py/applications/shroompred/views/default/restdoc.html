@@ -1,0 +1,96 @@
+{{extend 'template.html'}}
+
+        <section class="pb_section cover-bg-indigo cover-bg-opacity pb_gradient_v1" id="section-faq">
+      <div class="container">
+        <div class="row justify-content-center mb-5">
+          <div class="col-md-6 text-center mb-5">
+            <h5 class="text-uppercase pb_font-15 mb-2 pb_color-dark-opacity-3 pb_letter-spacing-2"><strong>REST</strong></h5>
+            <h2 class="text-white">Documentation</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md bg-white rounded">
+
+              {{from gluon.contrib.markdown.markdown2 import markdown}}
+{{=XML(markdown("""
+        **Predict Mushroom Edibility**
+----
+  Returns json data about edibility.
+
+* **URL**
+
+  /rest/api/:short
+
+* **Method:**
+
+  `GET`
+
+*  **URL Params**
+
+   **Required:**
+
+   `short=[integer]` 1 for shortcode or 0 for full form attributes
+
+* **Data Params**
+
+  **Required:**
+
+  ```{'cap_shape': 'k',
+ 'cap_surface': 'f',
+ 'cap_color': 'p',
+ 'bruises': 'f',
+ 'odor': 'fre',
+ 'gill_attachment': 'f',
+ 'gill_spacing': 'w',
+ 'gill_size': 'n',
+ 'gill_color': 'o',
+ 'stalk_shape': 'e',
+ 'stalk_root': 'b',
+ 'stalk_surface_above_ring': 'k',
+ 'stalk_surface_below_ring': 'f',
+ 'stalk_color_above_ring': 'w',
+ 'stalk_color_below_ring': 'c',
+ 'veil_type': 'p',
+ 'veil_color': 'w',
+ 'ring_number': 'o',
+ 'ring_type': 'l',
+ 'spore_print_color': 'n',
+ 'population': 'c',
+ 'habitat': 'u'}```
+
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `{ id : 12, name : "Michael Bloom" }`
+
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+    **Content:** `{ error : "User doesn't exist" }`
+
+  OR
+
+  * **Code:** 401 UNAUTHORIZED <br />
+    **Content:** `{ error : "You are unauthorized to make this request." }`
+
+* **Sample Call:**
+
+  ```javascript
+    $.ajax({
+      url: "/users/1",
+      dataType: "json",
+      type : "GET",
+      success : function(r) {
+        console.log(r);
+      }
+    });
+  ```
+
+     """
+))}}
+
+    </div>
+        </div>
+      </div>
+    </section>

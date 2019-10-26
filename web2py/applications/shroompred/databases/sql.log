@@ -82,3 +82,4 @@ CREATE TABLE "shroom_attr"(
     "source_tracking" CHAR(512)
 );
 success!
+success!
