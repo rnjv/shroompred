@@ -181,6 +181,31 @@ inv_attr_list={}
 for i in list(attr_list.keys()):
     inv_attr_list[i] = {v: k for k, v in attr_list[i].items()}
 
+    # Create vars in order
+    orderlist = ["cap_shape",
+               "cap_surface",
+               "cap_color",
+               "bruises",
+               "odor",
+               "gill_attachment",
+               "gill_spacing",
+               "gill_size",
+               "gill_color",
+               "stalk_shape",
+               "stalk_root",
+               "stalk_surface_above_ring",
+               "stalk_surface_below_ring",
+               "stalk_color_above_ring",
+               "stalk_color_below_ring",
+               "veil_type",
+               "veil_color",
+               "ring_number",
+               "ring_type",
+               "spore_print_color",
+               "population",
+               "habitat"]
+
+
 defaults = [
   'x',
   'y',

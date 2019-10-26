@@ -30,36 +30,12 @@ def index():
 
     # Store result
 
-    # Create vars in order
-    orderlist = ["cap_shape",
-               "cap_surface",
-               "cap_color",
-               "bruises",
-               "odor",
-               "gill_attachment",
-               "gill_spacing",
-               "gill_size",
-               "gill_color",
-               "stalk_shape",
-               "stalk_root",
-               "stalk_surface_above_ring",
-               "stalk_surface_below_ring",
-               "stalk_color_above_ring",
-               "stalk_color_below_ring",
-               "veil_type",
-               "veil_color",
-               "ring_number",
-               "ring_type",
-               "spore_print_color",
-               "population",
-               "habitat"]
-
-    if request.args==['2']:
+    if request.args==['3']:
         import random
         for i in orderlist:
             form.vars[i] = random.choice(list(attr_list[i].keys()))
 
-    if request.args==['3']:
+    if request.args==['2']:
         import random, os
         import pandas as pd
         datafile = open(os.path.join(request.folder, 'static/ml/data/mushrooms.csv'), 'r')
@@ -67,7 +43,6 @@ def index():
         lim_attr_list={}
         for i in range(len(df.columns[1:])):
             lim_attr_list[orderlist[i]] = [inv_attr_list[orderlist[i]][j] for j in list(df[df.columns[i+1]].unique())]
-        print(lim_attr_list)
         for i in orderlist:
             form.vars[i] = random.choice(list(lim_attr_list[i]))
 
@@ -83,7 +58,7 @@ def index():
 
     elif form.errors:
         session.formvars = form.vars
-        response.flash = T("Erorrs")
+        response.flash = T("Errors")
     else:
         session.formvars = form.vars
         response.flash = T("Unknown")
