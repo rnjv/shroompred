@@ -2,14 +2,14 @@
 
         <section class="pb_section cover-bg-indigo cover-bg-opacity pb_gradient_v1" id="section-faq">
       <div class="container">
-        <div class="row justify-content-center mb-5">
+        <div class="row justify-content-center">
           <div class="col-md-6 text-center mb-5">
             <h5 class="text-uppercase pb_font-15 mb-2 pb_color-dark-opacity-3 pb_letter-spacing-2"><strong>REST</strong></h5>
             <h2 class="text-white">Documentation</h2>
           </div>
         </div>
         <div class="row">
-          <div class="col-md bg-white rounded">
+          <div class="col-md bg-white rounded pt-5 pl-5">
 
               {{from gluon.contrib.markdown.markdown2 import markdown}}
 {{=XML(markdown("""
@@ -19,7 +19,7 @@
 
 * **URL**
 
-  /rest/api/:short
+  /rest/api?short=:short
 
 * **Method:**
 
@@ -29,11 +29,15 @@
 
    **Required:**
 
-   `short=[integer]` 1 for shortcode or 0 for full form attributes
+   `short=[integer]`
+
+   *Example : 1 for shortcode or 0 for full form attributes*
 
 * **Data Params**
 
   **Required:**
+
+  *Example:*
 
   ```{'cap_shape': 'k',
  'cap_surface': 'f',
@@ -58,34 +62,87 @@
  'population': 'c',
  'habitat': 'u'}```
 
+ or
+
+ ```{'cap_shape': 'convex',
+ 'cap_surface': 'smooth',
+ 'cap_color': 'purple',
+ 'bruises': 'bruises',
+ 'odor': 'fishy',
+ 'gill_attachment': 'attached',
+ 'gill_spacing': 'close',
+ 'gill_size': 'broad',
+ 'gill_color': 'gray',
+ 'stalk_shape': 'tapering',
+ 'stalk_root': 'missing',
+ 'stalk_surface_above_ring': 'fibrous',
+ 'stalk_surface_below_ring': 'scaly',
+ 'stalk_color_above_ring': 'pink',
+ 'stalk_color_below_ring': 'white',
+ 'veil_type': 'partial',
+ 'veil_color': 'orange',
+ 'ring_number': 'none',
+ 'ring_type': 'large',
+ 'spore_print_color': 'purple',
+ 'population': 'scattered',
+ 'habitat': 'waste'}```
 
 * **Success Response:**
 
   * **Code:** 200 <br />
-    **Content:** `{ id : 12, name : "Michael Bloom" }`
+    **Content:** `{"edible": "edible"}` or
+    `{"edible": "poisonous"}`
 
 * **Error Response:**
 
-  * **Code:** 404 NOT FOUND <br />
-    **Content:** `{ error : "User doesn't exist" }`
+  * **Code:** 400 <br />
+    **Content:** `400 Bad Request: Unable to parse request`
 
   OR
 
-  * **Code:** 401 UNAUTHORIZED <br />
-    **Content:** `{ error : "You are unauthorized to make this request." }`
+  * **Code:** 400 <br />
+    **Content:** `400 Bad Request: Mushroom attributes not found`
+
+  OR
+
+  * **Code:** 400 <br />
+    **Content:** `400 Bad Request: Required URL parameter(s) not found`
+
+  OR
+
+  * **Code:** 400 <br />
+    **Content:** `400 Bad Request: Missing mushroom attributes`
 
 * **Sample Call:**
 
-  ```javascript
-    $.ajax({
-      url: "/users/1",
-      dataType: "json",
-      type : "GET",
-      success : function(r) {
-        console.log(r);
-      }
-    });
-  ```
+  Python:
+
+  ```varslist = {'cap_shape': 'k',
+ 'cap_surface': 'f',
+ 'cap_color': 'p',
+ 'bruises': 'f',
+ 'odor': 'fre',
+ 'gill_attachment': 'f',
+ 'gill_spacing': 'w',
+ 'gill_size': 'n',
+ 'gill_color': 'o',
+ 'stalk_shape': 'e',
+ 'stalk_root': 'b',
+ 'stalk_surface_above_ring': 'k',
+ 'stalk_surface_below_ring': 'f',
+ 'stalk_color_above_ring': 'w',
+ 'stalk_color_below_ring': 'c',
+ 'veil_type': 'p',
+ 'veil_color': 'w',
+ 'ring_number': 'o',
+ 'ring_type': 'l',
+ 'spore_print_color': 'n',
+ 'population': 'c',
+ 'habitat': 'u'}```
+
+  `import requests`
+
+  `r = requests.get("http://127.0.0.1:8000/shroompred/rest/api?short=0", data=json.dumps(varslist), headers={"content-type": "application/json"})`
 
      """
 ))}}
