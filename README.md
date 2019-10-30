@@ -41,9 +41,11 @@ pip install -r requirements.txt
 # Launch server
 
 unzip web2py_src.zip
+
 python3 web2py/web2py.py
 
 # Type password
+
 'admin' as password
 
 You should get a browser launched
