@@ -43,7 +43,7 @@
  'cap_surface': 'f',
  'cap_color': 'p',
  'bruises': 'f',
- 'odor': 'fre',
+ 'odor': 'f',
  'gill_attachment': 'f',
  'gill_spacing': 'w',
  'gill_size': 'n',
@@ -121,7 +121,7 @@
  'cap_surface': 'f',
  'cap_color': 'p',
  'bruises': 'f',
- 'odor': 'fre',
+ 'odor': 'f',
  'gill_attachment': 'f',
  'gill_spacing': 'w',
  'gill_size': 'n',
@@ -140,9 +140,9 @@
  'population': 'c',
  'habitat': 'u'}```
 
-  `import requests`
+  `import requests, json
 
-  `r = requests.get("http://127.0.0.1:8000/shroompred/rest/api?short=0", data=json.dumps(varslist), headers={"content-type": "application/json"})`
+  `r = requests.get("http://127.0.0.1:8000/shroompred/rest/api?short=1", data=json.dumps(varslist), headers={"content-type": "application/json"})`
 
      """
 ))}}

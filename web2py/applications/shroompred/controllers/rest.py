@@ -54,21 +54,21 @@ def api():
     if request.vars.short=='0':
         try:
             for i in orderlist:
-                if bodyvars[i] not in list(inv_attr_list[i].keys()):
+                if bodyvars[i] not in list(attr_list[i].keys()):
                     raise HTTP(400, "400 Bad Request: Mushroom attribute not found")
                 else:
                     varlist[0].append(bodyvars[i])
-                    shroom_atrr[i] = inv_attr_list[i][bodyvars[i]]
+                    shroom_atrr[i] = bodyvars[i]
         except:
             raise HTTP(400)
     elif request.vars.short=='1':
         try:
             for i in orderlist:
-                if bodyvars[i] not in list(attr_list[i].keys()):
+                if bodyvars[i] not in list(inv_attr_list[i].keys()):
                     raise HTTP(400, "400 Bad Request: Mushroom attribute not found")
                 else:
                     varlist[0].append(attr_list[bodyvars[i]])
-                    shroom_atrr[i] = bodyvars[i]
+                    shroom_atrr[i] = inv_attr_list[i][bodyvars[i]]
         except:
             raise HTTP(400)
     else:

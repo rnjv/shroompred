@@ -4,13 +4,19 @@ Requires ubuntu
 
 # Python3
 
-Install Python 3
+Install Python 3 and Git (optional)
+
+# Download or extract git repo
+
+git clone https://github.com/rnjv/shroompred.git
+
+cd shroompred
 
 # Get pip
 
 curl --silent --show-error --retry 5 https://bootstrap.pypa.io/get-pip.py | sudo python3
 
-# Install Virtual Env
+# Install Virtualenv
 
 pip install --user virtualenv
 
@@ -24,7 +30,9 @@ python3 -m virtualenv shroompred_app
 
 Based on the above location, activate virtual environment
 
-source shroompred_app/bin/activate
+source shroompred_app/bin/activate on Linux
+
+shroompred_app/Scripts/activate on Windows
 
 # Install required packages
 

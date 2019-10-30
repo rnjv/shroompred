@@ -307,3 +307,21 @@ def gen_varslist():
     for i in orderlist:
         varslist[0].append(attr_list[i][testlist[i]])
     return varslist
+
+
+def gen_rest_varslist():
+    testlist = {}
+
+    import random, os
+
+    import pandas as pd
+    datafile = open(os.path.join(request.folder, 'static/ml/data/mushrooms.csv'), 'r')
+    df = pd.read_csv(datafile)
+    lim_attr_list = {}
+
+    for i in range(len(df.columns[1:])):
+        lim_attr_list[orderlist[i]] = [inv_attr_list[orderlist[i]][j] for j in list(df[df.columns[i + 1]].unique())]
+    for i in orderlist:
+        testlist[i] = random.choice(list(lim_attr_list[i]))
+
+    return testlist
