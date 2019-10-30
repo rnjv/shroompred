@@ -4,7 +4,7 @@ Requires ubuntu
 
 # Python3
 
-Install Python
+Install Python 3
 
 # Get pip
 
