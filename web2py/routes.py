@@ -1,1 +1,7 @@
-routers = dict(BASE = dict(default_application='shroompred'), )
+routers = dict(
+
+    # base router
+    BASE=dict(
+        default_application='shroompred',
+    ),
+)
