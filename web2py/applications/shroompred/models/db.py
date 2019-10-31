@@ -281,11 +281,9 @@ def predict(varslist):
 
     try:
         return "edible" if model.predict(test) == 1 else "poisonous"
-    except:
-    # Catch unavailable parameters not identified by eye from above and simulate error. We know the 'error' is caused
-    # by unavailable parameters during training, therefore model cannot make predictions
-        for i in test.columns:
-            print(i)
+    except Exception as error:
+    # Catch unavailable parameters not identified by eye from above and simulate error.
+        print(error)
         return "error"
 
 def gen_varslist():
@@ -309,7 +307,7 @@ def gen_varslist():
     return varslist
 
 
-def gen_rest_varslist():
+def gen_rest_varslist(short=0):
     testlist = {}
 
     import random, os
@@ -322,6 +320,9 @@ def gen_rest_varslist():
     for i in range(len(df.columns[1:])):
         lim_attr_list[orderlist[i]] = [inv_attr_list[orderlist[i]][j] for j in list(df[df.columns[i + 1]].unique())]
     for i in orderlist:
-        testlist[i] = random.choice(list(lim_attr_list[i]))
+        if short==0:
+            testlist[i] = random.choice(list(lim_attr_list[i]))
+        elif short==1:
+            testlist[i] = attr_list[i][random.choice(list(lim_attr_list[i]))]
 
     return testlist

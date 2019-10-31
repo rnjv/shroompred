@@ -57,23 +57,21 @@ def api():
                 if bodyvars[i] not in list(attr_list[i].keys()):
                     raise HTTP(400, "400 Bad Request: Mushroom attribute not found")
                 else:
-                    varlist[0].append(bodyvars[i])
+                    varlist[0].append(attr_list[i][bodyvars[i]])
                     shroom_atrr[i] = bodyvars[i]
         except:
             raise HTTP(400)
     elif request.vars.short=='1':
-        try:
+
             for i in orderlist:
                 if bodyvars[i] not in list(inv_attr_list[i].keys()):
                     raise HTTP(400, "400 Bad Request: Mushroom attribute not found")
                 else:
-                    varlist[0].append(attr_list[bodyvars[i]])
+                    varlist[0].append(bodyvars[i])
                     shroom_atrr[i] = inv_attr_list[i][bodyvars[i]]
-        except:
-            raise HTTP(400)
     else:
         raise HTTP(400, "400 Bad Request: URL variable unavailable")
-
+    print(varlist)
     pred = predict(varlist)
     shroom_atrr["prediction"] = pred
     shroom_atrr["source_tracking"] = "backend"

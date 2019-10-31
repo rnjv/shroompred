@@ -8,7 +8,7 @@ Install Python 3 and Git (optional)
 
 # Download or extract git repo
 
-git clone https://github.com/rnjv/shroompred.git
+git clone https://github.com/rnjv/shroompred.git or unzip the given file.
 
 cd shroompred
 
@@ -30,9 +30,9 @@ python3 -m virtualenv shroompred_app
 
 Based on the above location, activate virtual environment
 
-source shroompred_app/bin/activate on Linux
+source shroompred_app/bin/activate (on Linux)
 
-shroompred_app/Scripts/activate on Windows
+shroompred_app/Scripts/activate (on Windows)
 
 # Install required packages
 
