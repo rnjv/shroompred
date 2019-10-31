@@ -63,7 +63,7 @@ You should get a browser launched
 
 `import requests, json`
 
-#helper to generate random variables for request
+`#helper to generate random variables for request`
 `varslist = gen_rest_varslist(short=1)`
 
 `r = requests.get("http://127.0.0.1:8000/rest/api?short=1", data=json.dumps(varslist), headers={"content-type": "application/json"})`
