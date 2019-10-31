@@ -14,7 +14,13 @@ cd shroompred
 
 # Get pip
 
+Linux:
+
 curl --silent --show-error --retry 5 https://bootstrap.pypa.io/get-pip.py | sudo python3
+
+Windows:
+
+Download get-pip.py (https://bootstrap.pypa.io/get-pip.py) to a folder on your computer. Open a command prompt window and navigate to the folder containing get-pip.py. Then run python get-pip.py. This will install pip.
 
 # Install Virtualenv
 
@@ -28,7 +34,7 @@ python3 -m virtualenv shroompred_app
 
 # Activate your virtual environment
 
-Based on the above location, activate virtual environment
+Activate virtual environment (working directory is shroompred, make sure you have cd into it as instructed above)
 
 source shroompred_app/bin/activate (on Linux)
 
@@ -40,7 +46,7 @@ pip install -r requirements.txt
 
 # Launch server
 
-unzip web2py_src.zip
+unzip web2py_src.zip (On Windows, be sure to unzip so that only the web2py folder is overwritten and no new foler is created)
 
 python3 web2py/web2py.py
 
@@ -49,3 +55,15 @@ python3 web2py/web2py.py
 'admin' as password
 
 You should get a browser launched
+
+# 
+# Testing backend
+
+python3 web2py/web2py.py -M -S shroompred
+
+import requests, json
+
+#helper to generate random variables for request
+varslist = gen_rest_varslist(short=1)
+
+r = requests.get("http://127.0.0.1:8000/rest/api?short=1", data=json.dumps(varslist), headers={"content-type": "application/json"})
