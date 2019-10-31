@@ -1,6 +1,6 @@
 # shroompred
 
-Requires ubuntu
+Requires ubuntu or windows. Please start a Linux terminal or command prompt on Windows for the following steps.
 
 # Python3
 
@@ -46,7 +46,7 @@ Activate virtual environment (working directory is shroompred, make sure you hav
 
 # Launch server
 
-`unzip web2py_src.zip` (On Windows, be sure to unzip so that only the web2py folder is overwritten and no new foler is created)
+`unzip web2py_src.zip` (On Windows, be sure to unzip so that only the web2py folder is overwritten and no new folder is created)
 
 `python3 web2py/web2py.py`
 
@@ -59,11 +59,16 @@ You should get a browser launched
 # 
 # Testing backend
 
+Leave server running. On a new terminal, on the same shroompred folder, perform the following:
+
+`source shroompred_app/bin/activate`
+
 `python3 web2py/web2py.py -M -S shroompred`
 
 `import requests, json`
 
 `#helper to generate random variables for request`
+
 `varslist = gen_rest_varslist(short=1)`
 
 `r = requests.get("http://127.0.0.1:8000/rest/api?short=1", data=json.dumps(varslist), headers={"content-type": "application/json"})`
